@@ -5,9 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Home({ data }: any) {
   const [myData, setMyData] = useState<ICard[] | undefined>();
-  const [currentCategory, setCurrentCategory] = useState("");
-
-  console.log("currentCategory:", currentCategory);
+  const [currentCategory, setCurrentCategory] = useState("All");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,23 +14,20 @@ export default function Home({ data }: any) {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (myData) {
-      const filteredData = myData.filter((item) => {
-        return item.foodname === "real korean bibimbab";
-      });
-
-      setMyData(filteredData);
-    } else if (myData!) {
-      setMyData(data);
+  function filterData(category: string, data: ICard[]) {
+    if (category === "All") {
+      return data;
+    } else {
+      return data.filter((card) => card.foodname === category);
     }
-  }, [currentCategory]);
+  }
+
+  const filteredData = filterData(currentCategory, myData || []);
 
   return (
     <div>
       <CategoryContainer setCurrentCategory={setCurrentCategory} />
-
-      <CardContainer myData={myData} />
+      <CardContainer myData={filteredData} />
     </div>
   );
 }

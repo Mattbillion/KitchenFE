@@ -1,4 +1,4 @@
-import { ICategory, myObj } from "@/utils/Types";
+import { myObj } from "@/utils/Types";
 
 interface PropType {
   data: myObj;

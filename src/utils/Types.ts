@@ -14,3 +14,4 @@ export interface myObj {
   name: string;
   setCurrentCategory?: (arg: string)=> void
 }
+

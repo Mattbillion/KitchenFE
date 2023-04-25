@@ -8,13 +8,13 @@ interface CategoryContainerType{
 export default function CategoryContainer({setCurrentCategory}:CategoryContainerType): JSX.Element {
   const myObj:myObj[] = [
     {
-      name: "Category1"
+      name: "All"
     },
     {
-      name: "Category2"
+      name: "real korean bibimbab"
     },
     {
-      name: "Category3"
+      name: "Bibimbab"
     },
     {
       name: "Category4"
