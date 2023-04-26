@@ -12,7 +12,7 @@ export default function Card(props: { myData: ICard }) {
       />
 
       <h1 className="">{myData.foodname}</h1>
-      <p>{myData.desc}</p>
+      <p className="truncate">{myData.desc}</p>
       <p>{myData.price}</p>
     </div>
   );
