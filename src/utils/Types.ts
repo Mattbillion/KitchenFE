@@ -1,13 +1,19 @@
+import { ReactNode } from "react";
+
 export interface ICard {
   img: string;
   foodname: string;
   price: number;
   desc: string;
-  category: string;
+  category: {
+    name: string;
+  };
+
 }
 
 export interface ICategory {
   name: string;
+
 }
 
 export interface myObj {
@@ -23,3 +29,10 @@ export interface Inputs {
   desc: string;
 
 }
+
+export interface ILayout {
+
+  children: ReactNode;
+}
+
+

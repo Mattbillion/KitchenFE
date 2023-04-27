@@ -1,33 +1,30 @@
 import CardContainer from "@/Components/CardContainer";
 import CategoryContainer from "@/Components/CategoryContainer";
-import { ICard } from "@/utils/Types";
+import { ICard, ICategory } from "@/utils/Types";
 import { useEffect, useState } from "react";
 
 export default function Home({ data }: any) {
-  const [myData, setMyData] = useState<ICard[] | undefined>();
-  const [currentCategory, setCurrentCategory] = useState("All");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setMyData(data);
-    };
-    fetchData();
-  }, []);
-
-  function filterData(category: string, data: ICard[]) {
-    if (category === "All") {
-      return data;
-    } else {
-      return data.filter((card) => card.foodname === category);
-    }
+  const [products, setProducts] = useState<ICard[]>(data);
+  const [currentCategory, setCurrentCategory] = useState<string>('All')
+ 
+  function filterData(category: string) {
+    setCurrentCategory(category);
   }
 
-  const filteredData = filterData(currentCategory, myData || []);
+  useEffect(() => {
+    if(currentCategory === 'All') {
+      setProducts(data)
+    } else {
+      setProducts(data.filter((product: ICard) => product.category.name === currentCategory))
+    }
+  },[currentCategory])
+
+
 
   return (
     <div>
-      <CategoryContainer setCurrentCategory={setCurrentCategory} />
-      <CardContainer myData={filteredData} />
+      <CategoryContainer filterData={filterData} />
+      <CardContainer myData={products} />
     </div>
   );
 }
