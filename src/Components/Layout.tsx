@@ -3,11 +3,10 @@ import CategoryContainer from "./CategoryContainer";
 
 export default function Layout(
   { children }: ILayout,
-): JSX.Element
- {
+): JSX.Element {
   return (
     <>
-      <CategoryContainer/>
+      <CategoryContainer />
       <main>{children}</main>
     </>
   );

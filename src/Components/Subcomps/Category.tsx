@@ -1,30 +1,23 @@
 import { ICategory } from "@/utils/Types";
+import { useEffect, useState } from "react";
 
 interface PropType {
   data: ICategory;
-  filterData:any
+  filterData: any;
+  current: number;
+  index: number;
+  setCurrent: (arg: number) => void;
 }
 
-
-
-export default function CategoryButton({ data, filterData }: PropType) {
-
-
-
-// function buttonHandler () {
-//   setData(data.filter(item=>item=));
-//   localStorage.setItem("categoryname", data.name)
-//   console.log(localStorage.getItem('current'))
-// }
-
-// `border p-4 rounded-lg ${data.name === localStorage.getItem('current') ? "bg-purple-600 text-white" : "bg-white"}`} onClick={() => {
-//   setProducts(data.name)
-// }
-
-
+export default function CategoryButton({
+  data,
+  filterData,
+}: PropType) {
   return (
-    <button className="" onClick={() => {filterData(data.name); console.log(data.name)}}>
-         {data.name}
-    </button>
+    <div onClick={() => filterData(data.name)}>
+      <div>
+    
+      </div>
+    </div>
   );
 }

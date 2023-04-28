@@ -5,21 +5,23 @@ import { useEffect, useState } from "react";
 
 export default function Home({ data }: any) {
   const [products, setProducts] = useState<ICard[]>(data);
-  const [currentCategory, setCurrentCategory] = useState<string>('All')
- 
+  const [currentCategory, setCurrentCategory] = useState<string>("All");
+
   function filterData(category: string) {
     setCurrentCategory(category);
   }
 
   useEffect(() => {
-    if(currentCategory === 'All') {
-      setProducts(data)
+    if (currentCategory === "All") {
+      setProducts(data);
     } else {
-      setProducts(data.filter((product: ICard) => product.category.name === currentCategory))
+      setProducts(
+        data.filter(
+          (product: ICard) => product.category.name === currentCategory
+        )
+      );
     }
-  },[currentCategory])
-
-
+  }, [currentCategory]);
 
   return (
     <div>
