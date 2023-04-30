@@ -9,12 +9,12 @@ export default function CreateCategory() {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  // console.log(watch("category"));
-useEffect(()=> {
-  fetch("http://localhost:3000/Category")
-  .then(res => (res.json))
-  .then(data => console.log(data))
-}, [])
+
+  useEffect(() => {
+    fetch("http://localhost:3000/Category/add")
+      .then((res) => res.json)
+      .then((data) => console.log(data));
+  }, []);
   return (
     <div className="w-[320px] mx-auto p-[16px]">
       <form onSubmit={handleSubmit(onSubmit)}>

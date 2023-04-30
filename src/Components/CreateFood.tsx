@@ -1,51 +1,52 @@
-import { Inputs } from "@/utils/Types";
-import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export default function CreateFood() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  // console.log(watch("category"));
+  const [categories, setCategories] = useState<any[]>([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/category")
+      .then((res) => setCategories(res.data));
+  }, []);
+
+  function onSubmit(e: any) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", e.target.imageURL.files[0]);
+    const newfood: any = {
+      title: e.target.title.value,
+      desc: e.target.desc.value,
+      category: e.target.category.value,
+      price: e.target.price.value,
+    };
+    formData.append("newfood", JSON.stringify(newfood));
+    axios
+      .post("http://localhost:3000/product/add", formData)
+      .then((res) => console.log(res));
+  }
 
   return (
     <div className="w-[320px] mx-auto p-[16px]">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* register your input into the hook by invoking the "register" function */}
-        <input
-          className="w-full p-[16px]"
-          placeholder="Name"
-          {...register("foodname")}
-        />
+      <form onSubmit={(e) => onSubmit(e)}>
+        <input className="w-full p-[16px]" placeholder="Name" name="title" />
         <input
           className="w-full p-[16px]"
           placeholder="Description"
-          {...register("desc")}
+          name="desc"
         />
-        <select
-          className="w-full py-[16px] border rounded-md"
-          {...register("category", { required: true })}
-        >
-          <option value="" disabled selected>
-            Select Category
-          </option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
+        <select className="w-full py-[16px] border rounded-md" name="category">
+          {categories.map((category, index) => (
+            <option key={index}>{category.name}</option>
+          ))}
         </select>
-        <input
-          className="w-full p-[16px]"
-          placeholder="Price"
-          {...register("price", { required: true })}
-        />
-
-        {errors.exampleRequired && <span>This field is required</span>}
-        <input
+        <input className="w-full p-[16px]" placeholder="Price" name="price" />
+        <input className="w-full p-[16px]" type="file" name="imageURL" />
+        <button
           className="w-full border mt-[16px] p-[8px] rounded-md bg-purple-600 text-white"
           type="submit"
-        />
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

@@ -8,18 +8,16 @@ export interface ICard {
   category: {
     name: string;
   };
-
 }
 
 export interface ICategory {
   name: string;
   img: string;
-
 }
 
 export interface myObj {
   name: string;
-  setCurrentCategory?: (arg: string) => void
+  setCurrentCategory?: (arg: string) => void;
 }
 
 export interface Inputs {
@@ -28,12 +26,9 @@ export interface Inputs {
   foodname: string;
   price: string;
   desc: string;
-
+  file: string;
 }
 
 export interface ILayout {
-
   children: ReactNode;
 }
-
-
